@@ -63,11 +63,10 @@ def main():
     
     # Start the game loop
     for episode in range(1, MAX_EPISODES + 1):
-        obs, step, done = env.reset(), 1, False
+        obs, done = env.reset(), False
         action = agent.act(obs, reward, done, episode)
         
         while not done:
-            step += 1
             
             # Un-comment to show the game on screen 
             #env.render()
