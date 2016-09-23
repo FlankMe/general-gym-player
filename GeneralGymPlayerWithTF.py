@@ -18,7 +18,7 @@ https://github.com/flankme
 game_name = 'CartPole-v0'
 MAX_EPISODES = 500
 CONSECUTIVE_EPISODES = 100   # Number of trials' rewards to average for solving
-IS_RECORDING = True        # When True, steps per episode are capped at 200
+IS_RECORDING = True        
 
 # Fine-tuning the EPSILON_DECAY parameters will lead to better results for 
 # some environments and worse for others. As this code is a go at a 
