@@ -10,15 +10,15 @@ run, and let the script learn how to solve it.
 Note the code only works for environments with discrete action space and 
 continuous observation space.
 
-https://github.com/flankme
+https://github.com/FlankMe/general-gym-player
 @author: Riccardo Rossi
 """
 
 # Choice of the game and definition of the goal
 game_name = 'CartPole-v0'
-MAX_EPISODES = 500
+MAX_EPISODES = 2000
 CONSECUTIVE_EPISODES = 100   # Number of trials' rewards to average for solving
-IS_RECORDING = True        
+IS_RECORDING = True 
 
 # Fine-tuning the EPSILON_DECAY parameters will lead to better results for 
 # some environments and worse for others. As this code is a go at a 
@@ -97,7 +97,6 @@ class Agent():
         
         # Hyperparameters of the training
         self._DISCOUNT_FACTOR = 0.99    # discount of future rewards
-        self._ALPHA = 1e-3              # learning rate
         self._TRAINING_PER_STAGE = 1
         self._MINIBATCH_SIZE = 128      
         self._REPLAY_MEMORY = 50000     
@@ -216,8 +215,7 @@ class Agent():
         # Run a training step
         self._nn.fit(previous_states,
                           actions, 
-                          valuePreviousstates,
-                          self._ALPHA)
+                          valuePreviousstates)
 
 
 """
@@ -238,7 +236,8 @@ class FeedForwardNeuralNetwork:
         Change this method if you wish to use a different library
         """
         
-        import tensorflow as tf
+        import tensorflow as tf        
+        self._ALPHA = 1e-3              # learning rate        
         
         # The chosen activation function is the Leaky ReLU function
         self._activation = lambda x : tf.maximum(0.01*x, x)
@@ -280,9 +279,9 @@ class FeedForwardNeuralNetwork:
             self._state_value_layer, self._action), reduction_indices=1)
         self._cost = tf.reduce_sum(tf.square(
             self._target - self._action_value_vector))
-        self._ALPHA = tf.placeholder('float')
+        self._alpha = tf.placeholder('float')
         self._train_operation = tf.train.AdamOptimizer(
-            self._ALPHA).minimize(self._cost)
+            self._alpha).minimize(self._cost)
         self._session = tf.Session()
 
         operation_intizializer = tf.initialize_all_variables()
@@ -293,19 +292,19 @@ class FeedForwardNeuralNetwork:
                             self._state_value_layer, 
                             feed_dict={self._input_layer: state})
         
-        self._backProp = lambda valueStates, actions, valueTarget, alpha : (
+        self._backProp = lambda valueStates, actions, valueTarget : (
             self._session.run(self._train_operation, 
             feed_dict={self._input_layer: valueStates,
                        self._action: actions,
                        self._target: valueTarget,
-                       self._ALPHA : alpha}))
+                       self._alpha : self._ALPHA}))
                                          
                                          
     def predict(self, state):    
         return(self._feedFwd(state))
        
-    def fit(self, valueStates, actions, valueTarget, alpha):                      
-        self._backProp(valueStates, actions, valueTarget, alpha)
+    def fit(self, valueStates, actions, valueTarget):                      
+        self._backProp(valueStates, actions, valueTarget)
 
 
 if __name__=="__main__":
