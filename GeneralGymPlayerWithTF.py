@@ -16,7 +16,7 @@ https://github.com/FlankMe/general-gym-player
 
 # Choice of the game and definition of the goal
 game_name = 'CartPole-v0'
-MAX_EPISODES = 2000
+MAX_EPISODES = 5000
 CONSECUTIVE_EPISODES = 100   # Number of trials' rewards to average for solving
 IS_RECORDING = True 
 
@@ -44,6 +44,8 @@ def main():
         'env.action_space is not Discrete and is currently unsupported')
     assert isinstance(env.observation_space, gym.spaces.box.Box), (
         'env.observation_space is not continuous and is currently unsupported')
+    assert len(env.observation_space.shape) == 1, (
+        'env.observation_space is multi-dimensional and currently unsupported')
     if IS_RECORDING:
         env.monitor.start('results-' + game_name, force=True)
         
@@ -99,7 +101,7 @@ class Agent():
         self._DISCOUNT_FACTOR = 0.99    # discount of future rewards
         self._TRAINING_PER_STAGE = 1
         self._MINIBATCH_SIZE = 128      
-        self._REPLAY_MEMORY = 50000     
+        self._REPLAY_MEMORY = 100000     
 
         # Exploration/exploitations parameters
         self._epsilon = 1.
