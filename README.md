@@ -13,6 +13,8 @@ As the script relies on a plain feed-forward neural net, really I should have co
 Yet, I lazily chose to let TensorFlow do the heavy lifting and to enjoy the convenience of the readily-available Adam Optimizer.   
 I may publish a Numpy (stochastic gradient descent) implementation at a later stage.  
 
+**EDIT: Numpy implementation is now available in the same folder. File name is `GeneralGymPlayerWithNP.py`.**
+
 ### Requirements
 * **Python 3**. I recommend this version as it's the only one I found compatible with the below libraries;
 * **PyGame**, I used version 1.9.2a0. Download it from [here][1];
