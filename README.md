@@ -15,6 +15,10 @@ I may publish a Numpy (stochastic gradient descent) implementation at a later st
 
 **EDIT: Numpy implementation is now available in the same folder. File name is `GeneralGymPlayerWithNP.py`.**
 
+<img src="https://github.com/FlankMe/general-gym-player/blob/master/Animations/CartPole-v0.gif" width="30%" />
+<img src="https://github.com/FlankMe/general-gym-player/blob/master/Animations/Acrobot-v0.gif" width="30%" /> 
+<img src="https://github.com/FlankMe/general-gym-player/blob/master/Animations/LunarLander-v2.gif" width="30%" />
+
 ### Requirements
 * **Python 3**. I recommend this version as it's the only one I found compatible with the below libraries;
 * **PyGame**, I used version 1.9.2a0. Download it from [here][1];
