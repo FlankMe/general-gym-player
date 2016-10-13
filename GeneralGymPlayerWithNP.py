@@ -295,7 +295,6 @@ if __name__=="__main__":
         action = agent.act(obs, reward, done, episode)
         
         while not done:
-            
             # Un-comment to show the game on screen 
             #env.render()
             
