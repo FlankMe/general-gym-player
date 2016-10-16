@@ -21,11 +21,9 @@ I may publish a Numpy (stochastic gradient descent) implementation at a later st
 
 ### Requirements
 * **Python 3**. I recommend this version as it's the only one I found compatible with the below libraries;
-* **PyGame**, I used version 1.9.2a0. Download it from [here][1];
 * **TensorFlow**, I only managed to install it on my Mac. Download it from [here][2];
 * **Gym**, open-source collection of test problems for reinforcement learning algorithms. Details on how to download it can be found [here][3]. 
 
-[1]: http://www.pygame.org/download.shtml 
 [2]: https://www.tensorflow.org/versions/r0.7/get_started/os_setup.html 
 [3]: https://gym.openai.com/docs
 [4]: https://gym.openai.com/users/FlankMe
