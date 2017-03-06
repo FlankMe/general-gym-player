@@ -15,7 +15,7 @@ https://github.com/FlankMe/general-gym-player
 """
 
 # Choice of the game and definition of the goal
-game_name = 'CartPole-v0'
+game_name = 'LunarLander-v2'
 MAX_EPISODES = 5000
 CONSECUTIVE_EPISODES = 100   # Number of trials' rewards to average for solving
 IS_RECORDING = True 
@@ -28,6 +28,7 @@ EPSILON_DECAY = 0.98
 # Import basic libraries
 import numpy as np
 import time
+from gym.wrappers import Monitor
 np.random.seed(int(time.time()))
 
 
@@ -47,7 +48,7 @@ def main():
     assert len(env.observation_space.shape) == 1, (
         'env.observation_space is multi-dimensional and currently unsupported')
     if IS_RECORDING:
-        env.monitor.start('results-' + game_name, force=True)
+        env = Monitor(env,'results-TF/' + game_name, force=True)
         
     # Parameters of the game and learning
     obs_space = env.observation_space.shape[0]
@@ -80,9 +81,6 @@ def main():
             
     # Save info and shut activities
     env.close()
-    if IS_RECORDING:
-        env.monitor.close()
-    
 
 """
 The general game player implements the Q-learning method with minibatches
@@ -286,7 +284,7 @@ class FeedForwardNeuralNetwork:
             self._alpha).minimize(self._cost)
         self._session = tf.Session()
 
-        operation_intizializer = tf.initialize_all_variables()
+        operation_intizializer = tf.global_variables_initializer()
         self._session.run(operation_intizializer)
            
         # Definition of feed_forward and optimization functions

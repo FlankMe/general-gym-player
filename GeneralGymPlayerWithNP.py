@@ -14,10 +14,10 @@ https://github.com/FlankMe/general-gym-player
 """
 
 # Choice of the game and definition of the goal
-game_name = 'CartPole-v0'
+game_name = 'LunarLander-v2'
 MAX_EPISODES = 1000
 CONSECUTIVE_EPISODES = 100   # Number of trials' rewards to average for solving
-IS_RECORDING = False 
+IS_RECORDING = True 
 
 # Fine-tuning the EPSILON_DECAY parameters will lead to better results for 
 # some environments and worse for others. As this code is a go at a 
@@ -264,6 +264,7 @@ if __name__=="__main__":
 
     # Import gym and launch the game
     import gym
+    from gym.wrappers import Monitor
     env = gym.make(game_name)
     
     assert isinstance(env.action_space, gym.spaces.discrete.Discrete), (
@@ -273,7 +274,7 @@ if __name__=="__main__":
     assert len(env.observation_space.shape) == 1, (
         'env.observation_space is multi-dimensional and currently unsupported')
     if IS_RECORDING:
-        env.monitor.start('results-' + game_name, force=True)
+        env = Monitor(env, 'results-NP/' + game_name, force=True)
         
     # Parameters of the game and learning
     obs_space = env.observation_space.shape[0]
@@ -296,7 +297,7 @@ if __name__=="__main__":
         
         while not done:
             # Un-comment to show the game on screen 
-            #env.render()
+            # env.render()
             
             # Decide next action and feed the decision to the environment         
             obs, reward, done, _ = env.step(action)  
@@ -305,5 +306,3 @@ if __name__=="__main__":
             
     # Save info and shut activities
     env.close()
-    if IS_RECORDING:
-        env.monitor.close()
