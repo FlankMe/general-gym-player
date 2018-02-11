@@ -8,10 +8,7 @@ Note the code only works for environments with discrete action space and continu
 Results can be found on [https://gym.openai.com/users/FlankMe][4]
 
 ### Implementation of the neural net
-As the script relies on a plain feed-forward neural net, really I should have coded it in Numpy.  
-
-Yet, I lazily chose to let TensorFlow do the heavy lifting and to enjoy the convenience of the readily-available Adam Optimizer.   
-I may publish a Numpy (stochastic gradient descent) implementation at a later stage.  
+As the script relies on a plain feed-forward neural net, really I should have coded it in Numpy. I may publish a Numpy (stochastic gradient descent) implementation at a later stage.  
 
 **EDIT: Numpy implementation is now available in the same folder. File name is `GeneralGymPlayerWithNP.py`.**
 
